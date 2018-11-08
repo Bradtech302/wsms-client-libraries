@@ -1,0 +1,14 @@
+{
+	"name": "bradford-wsms-client-library",
+	"version": "1.0.3",
+	"description": "The client library for Bradford Whitel Label Session Management System",
+	"author": "Charlie charlie@bradfordsoftware.com",
+	"main": "bradford-wsms.js",
+	"scripts": {
+		"start": "node bradford-wsms.js"
+	},
+	"dependencies": {
+		"njwt": "^0.4.0",
+		"uuid": "^3.2"
+	}
+}
