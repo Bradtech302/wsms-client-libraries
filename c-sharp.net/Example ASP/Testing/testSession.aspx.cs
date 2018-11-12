@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,10 +19,10 @@ namespace Testing
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int iid = 1002;
+            int iid = 998;
             var claims = new List<Claim>();
-            
-            claims.Add(new Claim("iat", DateTime.Now.ToString("M/d/yyyy")));
+
+            claims.Add(new Claim("iat", DateTime.Now.ToString("M/d/yyyy"), ClaimValueTypes.Integer64));
             claims.Add(new Claim("iss", "develop"));
             claims.Add(new Claim("userId", "111"));
             claims.Add(new Claim("userType", "true"));
@@ -33,9 +33,8 @@ namespace Testing
             int expHours = 24;
 
             WSMSClient libObj = new WSMSClient();
-            txtResponse.Text = libObj.createSession(iid, @"D:\Training\C# code which can generate JWT\ClassLibraryProjects\SessionLibrary\bin\Debug\private_key.pem", claims, expHours);
+            txtResponse.Text = libObj.CreateSession(iid, @"D:\Training\C# code which can generate JWT\ClassLibraryProjects\SessionLibrary\bin\Debug\sandbox_key.pem", claims, expHours).ToString();
 
-       
         }
     }
 }
