@@ -108,7 +108,7 @@ exports.createSession = function(kid, claims, expHours, pKey64, options, data) {
         var http = require('https');
         var url = require('url');
 
-        var urlOptions = url.parse('https://clickforms.appraisalworld.com/wsms/sessions');
+        var urlOptions = url.parse('https://develop-clickforms.appraisalworld.com/wsms/sessions');
     
         urlOptions.headers = {
             'authorization': 'Bearer ' + jwt,
@@ -119,20 +119,22 @@ exports.createSession = function(kid, claims, expHours, pKey64, options, data) {
                 
         var getReq = http.request(urlOptions, (responseHandler) => {
             
-            var buff;
+            var buff = '';
 
-            if (responseHandler.statusCode !== 201) {                             
-                reject();
-                return;
-            }
+
     
            
             responseHandler.on('data', (chunk) => {
                 buff += chunk;
             });
     
-            responseHandler.on('end', () => {                
-                resolve(); 
+            responseHandler.on('end', () => {   
+                
+                if (responseHandler.statusCode !== 201) {                             
+                    reject(responseHandler.statusCode + ' ' + buff);               
+                }
+                else
+                    resolve(buff) 
             });
     
         })
